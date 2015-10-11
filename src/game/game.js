@@ -25,7 +25,6 @@ class Game {
    * @returns {String|undefined}
    */
    render (element) {
-
     debug('render name game with state', this.state);
 
     // would be in JSX: <AppRoot state={this.state} />
