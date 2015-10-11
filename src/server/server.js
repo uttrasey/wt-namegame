@@ -18,7 +18,7 @@ app.get('/api', (req, res) => {
   request(newurl).pipe(res);
 });
 
-// server the application
+// serve the root application
 app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/index.html'));
 });

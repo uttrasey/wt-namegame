@@ -16,7 +16,6 @@ class Game {
    */
   constructor(options) {
     debug('create name game with optionsxxx', options);
-
     this.state = options.state;
   }
 
