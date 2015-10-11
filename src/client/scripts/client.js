@@ -19,16 +19,7 @@ function renderGame(employees) {
   var gameElement = document.getElementById('game');
   var game = new Game({
     state: {
-      employees: employees,
-      cart: {
-        title: 'My Cart',
-        items: [
-          {
-            title: 'Item 1',
-            price: 12
-          }
-        ]
-      }
+      employees: employees
     },
   });
   game.renderToDOM(gameElement);
