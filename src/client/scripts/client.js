@@ -1,5 +1,6 @@
 import Debug from 'debug';
 import App from '../../app';
+import Game from '../../game';
 
 var attachElement = document.getElementById('app');
 
@@ -33,3 +34,17 @@ app = new App({
 });
 
 app.renderToDOM(attachElement);
+
+// build the game and render it
+var gameElement = document.getElementById('game');
+
+var game;
+
+Debug.enable('nameGame*');
+
+// Create new app and attach to element
+game = new Game({
+  state: state
+});
+
+game.renderToDOM(gameElement);
