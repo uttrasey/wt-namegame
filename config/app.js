@@ -1,5 +1,5 @@
 var config = {};
 
-config.title = 'My React App';
+config.title = 'WillowTree name game';
 
 module.exports = config;
