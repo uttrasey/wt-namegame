@@ -1,6 +1,14 @@
 import Debug from 'debug';
 import Game from '../../game';
 
+// import request from 'request';
+// var employees;
+// request('http://localhost:3000/api', function (error, response, body) {
+//     if (!error && response.statusCode == 200) {
+//       employees = JSON.parse(body);
+//     }
+// });
+
 var state = {
   cart: {
     title: 'My Cart',
