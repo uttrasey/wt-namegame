@@ -1,7 +1,7 @@
 {
-  "name": "react-way-getting-started",
+  "name": "wt-namegame",
   "version": "1.0.0",
-  "description": "The React Way - Getting Started",
+  "description": "WillowTree name game React implementation based on https://blog.risingstack.com/the-react-way-getting-started-tutorial/",
   "main": "src/server/index.js",
   "scripts": {
     "test": "jest",
@@ -12,14 +12,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/RisingStack/react-way-getting-started.git"
+    "url": "https://github.com/uttrasey/wt-namegame.git"
   },
-  "author": "RisingStack, Peter Marton",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/RisingStack/react-way-getting-started/issues"
-  },
-  "homepage": "https://github.com/RisingStack/react-way-getting-started",
+  "author": "Matt Uttridge",
   "dependencies": {
     "debug": "^2.1.3",
     "express": "^4.12.3",
