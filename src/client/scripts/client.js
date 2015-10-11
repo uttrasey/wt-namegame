@@ -2,6 +2,14 @@ import Debug from 'debug';
 import request from 'request';
 import Game from '../../game';
 
+var employees;
+request(window.location.href + 'api', function (error, response, body) {
+    if (!error && response.statusCode === 200) {
+      employees = JSON.parse(body);
+      renderGame(employees);
+    }
+});
+
 function renderGame(employees) {
   var state = {
     cart: {
@@ -23,11 +31,3 @@ function renderGame(employees) {
   });
   game.renderToDOM(gameElement);
 }
-
-var employees;
-request('http://localhost:3000/api', function (error, response, body) {
-    if (!error && response.statusCode === 200) {
-      employees = JSON.parse(body);
-      renderGame(employees);
-    }
-});
