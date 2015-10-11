@@ -19,7 +19,10 @@ class Employee extends React.Component {
    * @returns {JSX}
    */
   render () {
-    return <li className="employee">{this.props.employee.name} - {this.props.employee.url}</li>;
+    return <div className="employee">
+              <img src={this.props.employee.url} />
+              <p>{this.props.employee.name}</p>
+           </div>
   }
 }
 
