@@ -1,8 +1,5 @@
 import Debug from 'debug';
-import App from '../../app';
 import Game from '../../game';
-
-var attachElement = document.getElementById('app');
 
 var state = {
   cart: {
@@ -23,17 +20,6 @@ var state = {
     ]
   }
 };
-
-var app;
-
-Debug.enable('myApp*');
-
-// Create new app and attach to element
-app = new App({
-  state: state
-});
-
-app.renderToDOM(attachElement);
 
 // build the game and render it
 var gameElement = document.getElementById('game');
