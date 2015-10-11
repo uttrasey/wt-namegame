@@ -2,32 +2,34 @@ import Debug from 'debug';
 import request from 'request';
 import Game from '../../game';
 
-var employees;
+Debug.enable('nameGame*');
+
+// get hold of the API data
 request(window.location.href + 'api', function (error, response, body) {
     if (!error && response.statusCode === 200) {
-      employees = JSON.parse(body);
+      var employees = JSON.parse(body);
       renderGame(employees);
     }
 });
 
+/*
+ * @description render the game
+ */
 function renderGame(employees) {
-  var state = {
-    cart: {
-      title: 'My Cart',
-      items: [
-        {
-          title: 'Item 1',
-          price: 12
-        }
-      ]
-    },
-    employees: employees
-  };
-  var game;
   var gameElement = document.getElementById('game');
-  Debug.enable('nameGame*');
-  game = new Game({
-    state: state
+  var game = new Game({
+    state: {
+      employees: employees,
+      cart: {
+        title: 'My Cart',
+        items: [
+          {
+            title: 'Item 1',
+            price: 12
+          }
+        ]
+      }
+    },
   });
   game.renderToDOM(gameElement);
 }
