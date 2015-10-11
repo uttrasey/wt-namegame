@@ -1,5 +1,6 @@
 import path from 'path';
 import Express from 'express';
+import request from 'request';
 
 var app = Express();
 var server;
@@ -9,6 +10,13 @@ const PATH_DIST = path.resolve(__dirname, '../../dist');
 
 app.use('/styles', Express.static(PATH_STYLES));
 app.use(Express.static(PATH_DIST));
+
+app.get('/api', (req, res) => {
+  //modify the url in any way you want
+  var newurl = 'http://api.namegame.willowtreemobile.com/';
+  request(newurl).pipe(res);
+});
+
 
 app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/index.html'));
