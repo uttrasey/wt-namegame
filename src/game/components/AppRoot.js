@@ -1,4 +1,4 @@
-import React from 'react/addons';
+import React from 'react';
 import GameBoard from './GameBoard';
 import config from '../../../config/app';
 
