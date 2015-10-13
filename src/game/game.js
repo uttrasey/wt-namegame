@@ -27,12 +27,12 @@ class Game extends React.Component {
   }
 
   render () {
-    return <div><Jumbotron>
-             <h1>WillowTree Name Game</h1>
-             <p>See how many names you can remember.</p>
-             <p>Using API URL {this.props.url}</p>
-             <p>{this.state.employees.length}</p>
-           </Jumbotron></div>;
+    return <div>
+            <Jumbotron>
+              <h1>WillowTree Name Game</h1>
+              <p>How many names can you remember?</p>
+            </Jumbotron>
+           </div>;
   }
 
 }
