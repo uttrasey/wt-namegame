@@ -1,7 +1,6 @@
 import React from 'react';
 import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import request from 'request';
-// import AppRoot from './components/AppRoot';
 
 /*
  * @class Game
@@ -15,6 +14,9 @@ class Game extends React.Component {
     };
   }
 
+  /**
+   * @description Load all the data and update state
+   */
   componentDidMount () {
     request(this.props.url, function (error, response, body) {
       if (!error && response.statusCode === 200) {
@@ -26,6 +28,9 @@ class Game extends React.Component {
     }.bind(this));
   }
 
+  /**
+   * @description Top level render of name game application
+   */
   render () {
     return <div>
             <Jumbotron>
