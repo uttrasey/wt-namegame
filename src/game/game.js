@@ -2,6 +2,7 @@ import React from 'react';
 import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import ProgressBar from 'react-bootstrap/lib/ProgressBar';
 import Button from 'react-bootstrap/lib/Button';
+import Image from 'react-bootstrap/lib/Image';
 import request from 'request';
 
 /*
@@ -30,7 +31,8 @@ class Game extends React.Component {
       if (!error && response.statusCode === 200) {
         var employees = JSON.parse(body);
         this.setState({
-          employees: employees
+          employees: employees,
+          init: true
         });
       }
     }.bind(this));
@@ -46,6 +48,9 @@ class Game extends React.Component {
    * @description Top level render of name game application
    */
   render () {
+    if (!this.state.init) {
+      return null;
+    } 
     return <div>
             <Jumbotron>
               <h1>WillowTree Name Game</h1>
@@ -66,12 +71,31 @@ class Game extends React.Component {
     }
   }
 
+  /**
+   * @description the initial board which explains the game
+   */
   getInitialBoard() {
+    var employee = this.getExampleEmployee();
+    var employeeStyle = {
+      margin: '10px'
+    };
     return <div className='initialBoard'>
-              <Button bsSize="large"
+              <div className='example'>
+                <Image style={employeeStyle} src={employee.url} thumbnail />
+                <h4>You will briefly see some faces like <b>{employee.name}</b>&apos;s then be asked to identify one!</h4>
+              </div>
+              <Button style={employeeStyle}
+                      bsSize="large"
                       bsStyle="success"
                       onClick={this.startGame.bind(this)}>Lets get started!</Button>
            </div>
+
+  }
+
+  getExampleEmployee() {
+    var employeeCount = this.state.employees.length;
+    var exampleIndex = Math.floor(Math.random() * employeeCount);
+    return this.state.employees[exampleIndex];
   }
 
   getInPlayBoard() {
@@ -93,7 +117,7 @@ class Game extends React.Component {
    * Is the user playing? i.e. started and finished
    */
   inProgress() {
-    return this.state.round > 0 && this.state.round < this.props.roundCount;
+    return this.state.round > 0 && this.state.round <= this.props.roundCount;
   }
 
 }
