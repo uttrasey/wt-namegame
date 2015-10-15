@@ -8,19 +8,6 @@ import Employee from './Employee';
  */
 class InitialBoard extends React.Component {
 
-  constructor(options) {
-    super(options);
-  }
-
-  /*
-   * TODO: is this needed? as static
-   * @method shouldComponentUpdate
-   * @returns {Boolean}
-   */
-  shouldComponentUpdate () {
-    return React.addons.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
-  }
-
   /*
    * @method render
    * @returns {JSX}
@@ -42,6 +29,7 @@ class InitialBoard extends React.Component {
 
 InitialBoard.propTypes = {
   employee: React.PropTypes.object.isRequired,
+  startCallback: React.PropTypes.func
 };
 
 export default InitialBoard;
