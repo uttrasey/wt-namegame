@@ -50,12 +50,15 @@ class Game extends React.Component {
   }
 
   /**
-   * @description Get users progress through the current game
+   * @description Get users progress through the current game (0 - 100)
    */
   getProgress() {
     return (this.state.round / this.props.roundCount) * 100;
   }
 
+  /**
+   * Is the user playing? i.e. started and finished
+   */
   inProgress() {
     return this.state.round > 0 && this.state.round < this.props.roundCount;
   }
