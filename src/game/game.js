@@ -1,6 +1,7 @@
 import React from 'react';
 import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import ProgressBar from 'react-bootstrap/lib/ProgressBar';
+import Button from 'react-bootstrap/lib/Button';
 import request from 'request';
 
 /*
@@ -15,7 +16,7 @@ class Game extends React.Component {
     super(options);
     this.state = {
       employees: [],
-      round: 5
+      round: 0
     };
   }
 
@@ -35,9 +36,14 @@ class Game extends React.Component {
     }.bind(this));
   }
 
+  startGame () {
+    this.setState({
+      round: 1
+    });
+  }
+
   /**
    * @description Top level render of name game application
-   * TODO make ProgressBar inactive upon completion
    */
   render () {
     return <div>
@@ -46,7 +52,34 @@ class Game extends React.Component {
               <p>How many names can you remember?</p>
             </Jumbotron>
             <ProgressBar active={this.inProgress()} bsStyle="success" now={this.getProgress()} />
+            {this.getCurrentBoard()}
            </div>;
+  }
+
+  getCurrentBoard () {
+    if (this.state.round === 0) {
+      return this.getInitialBoard();
+    } else if (this.state.round === this.props.roundCount) {
+      return this.getEndBoard();
+    } else {
+      return this.getInPlayBoard();
+    }
+  }
+
+  getInitialBoard() {
+    return <div className='initialBoard'>
+              <Button bsSize="large"
+                      bsStyle="success"
+                      onClick={this.startGame.bind(this)}>Lets get started!</Button>
+           </div>
+  }
+
+  getInPlayBoard() {
+    return <p>Playing!</p>;
+  }
+
+  getEndBoard() {
+    return <p>Finished!</p>;
   }
 
   /**
