@@ -3,7 +3,7 @@ import Image from 'react-bootstrap/lib/Image';
 import Thumbnail from 'react-bootstrap/lib/Thumbnail';
 
 /*
- * @class Item
+ * @class Employee
  * @extends React.Component
  */
 class Employee extends React.Component {
@@ -21,10 +21,8 @@ class Employee extends React.Component {
    * @returns {JSX}
    */
   render () {
-    var thumbStyle = {
-      'display': 'inline-block'
-    };
-    return <Thumbnail style={thumbStyle} src={this.props.employee.url} alt="242x200">
+    return <Thumbnail style={{'display': 'inline-block'}}
+                      src={this.props.employee.url}>
              <h3>{this.props.employee.name}</h3>
            </Thumbnail>;
   }
