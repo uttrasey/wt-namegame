@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'react-bootstrap/lib/Image';
 
 /*
  * @class Item
@@ -19,10 +20,13 @@ class Employee extends React.Component {
    * @returns {JSX}
    */
   render () {
-    return <div className="employee">
-              <img src={this.props.employee.url} />
-              <p>{this.props.employee.name}</p>
-           </div>
+    var employeeStyle = {
+      margin: '10px'
+    };
+    return <div className='employee'>
+              <Image style={employeeStyle} src={this.props.employee.url} thumbnail />
+              <h4>{this.props.employee.name}</h4>
+           </div>;
   }
 }
 

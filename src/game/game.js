@@ -1,9 +1,9 @@
 import React from 'react';
+import request from 'request';
 import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import ProgressBar from 'react-bootstrap/lib/ProgressBar';
 import Button from 'react-bootstrap/lib/Button';
-import Image from 'react-bootstrap/lib/Image';
-import request from 'request';
+import Employee from './components/Employee';
 
 /*
  * @class Game representing the game board.
@@ -50,7 +50,7 @@ class Game extends React.Component {
   render () {
     if (!this.state.init) {
       return null;
-    } 
+    }
     return <div>
             <Jumbotron>
               <h1>WillowTree Name Game</h1>
@@ -76,16 +76,10 @@ class Game extends React.Component {
    */
   getInitialBoard() {
     var employee = this.getExampleEmployee();
-    var employeeStyle = {
-      margin: '10px'
-    };
     return <div className='initialBoard'>
-              <div className='example'>
-                <Image style={employeeStyle} src={employee.url} thumbnail />
-                <h4>You will briefly see some faces like <b>{employee.name}</b>&apos;s then be asked to identify one!</h4>
-              </div>
-              <Button style={employeeStyle}
-                      bsSize="large"
+              <Employee employee={employee} />
+              <h4>You will briefly see some faces then be asked to identify one!</h4>
+              <Button bsSize="large"
                       bsStyle="success"
                       onClick={this.startGame.bind(this)}>Lets get started!</Button>
            </div>
