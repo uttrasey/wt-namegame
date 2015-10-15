@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'react-bootstrap/lib/Image';
+import Thumbnail from 'react-bootstrap/lib/Thumbnail';
 
 /*
  * @class Item
@@ -20,13 +21,12 @@ class Employee extends React.Component {
    * @returns {JSX}
    */
   render () {
-    var employeeStyle = {
-      margin: '10px'
+    var thumbStyle = {
+      'display': 'inline-block'
     };
-    return <div className='employee'>
-              <Image style={employeeStyle} src={this.props.employee.url} thumbnail />
-              <h4>{this.props.employee.name}</h4>
-           </div>;
+    return <Thumbnail style={thumbStyle} src={this.props.employee.url} alt="242x200">
+             <h3>{this.props.employee.name}</h3>
+           </Thumbnail>;
   }
 }
 

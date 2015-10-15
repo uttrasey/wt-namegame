@@ -2,8 +2,7 @@ import React from 'react';
 import request from 'request';
 import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import ProgressBar from 'react-bootstrap/lib/ProgressBar';
-import Button from 'react-bootstrap/lib/Button';
-import Employee from './components/Employee';
+import InitialBoard from './components/InitialBoard';
 
 /*
  * @class Game representing the game board.
@@ -38,12 +37,6 @@ class Game extends React.Component {
     }.bind(this));
   }
 
-  startGame () {
-    this.setState({
-      round: 1
-    });
-  }
-
   /**
    * @description Top level render of name game application
    */
@@ -71,19 +64,18 @@ class Game extends React.Component {
     }
   }
 
+  startGame () {
+    this.setState({
+      round: 1
+    });
+  }
+
   /**
-   * @description the initial board which explains the game
+   * @description the initial board which explains how to play the game
    */
   getInitialBoard() {
-    var employee = this.getExampleEmployee();
-    return <div className='initialBoard'>
-              <Employee employee={employee} />
-              <h4>You will briefly see some faces then be asked to identify one!</h4>
-              <Button bsSize="large"
-                      bsStyle="success"
-                      onClick={this.startGame.bind(this)}>Lets get started!</Button>
-           </div>
-
+    return <InitialBoard employee={this.getExampleEmployee()}
+                         startCallback={this.startGame.bind(this)} />
   }
 
   getExampleEmployee() {
