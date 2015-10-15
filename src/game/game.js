@@ -1,21 +1,28 @@
 import React from 'react';
 import Jumbotron from 'react-bootstrap/lib/Jumbotron';
+import ProgressBar from 'react-bootstrap/lib/ProgressBar';
 import request from 'request';
 
 /*
- * @class Game
+ * @class Game representing the game board.
  */
 class Game extends React.Component {
 
+  /**
+   * @constructor
+   */
   constructor(options) {
-    super();
+    super(options);
     this.state = {
-      employees: []
+      employees: [],
+      round: 5
     };
   }
 
   /**
    * @description Load all the data and update state
+   * TODO: handle graceful failure of REST API
+   * TODO: use local storage to cache the API response
    */
   componentDidMount () {
     request(this.props.url, function (error, response, body) {
@@ -30,6 +37,7 @@ class Game extends React.Component {
 
   /**
    * @description Top level render of name game application
+   * TODO make ProgressBar inactive upon completion
    */
   render () {
     return <div>
@@ -37,7 +45,19 @@ class Game extends React.Component {
               <h1>WillowTree Name Game</h1>
               <p>How many names can you remember?</p>
             </Jumbotron>
+            <ProgressBar active={this.inProgress()} bsStyle="success" now={this.getProgress()} />
            </div>;
+  }
+
+  /**
+   * @description Get users progress through the current game
+   */
+  getProgress() {
+    return (this.state.round / this.props.roundCount) * 100;
+  }
+
+  inProgress() {
+    return this.state.round > 0 && this.state.round < this.props.roundCount;
   }
 
 }

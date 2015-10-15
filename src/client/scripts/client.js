@@ -4,4 +4,4 @@ import config from '../../../config/app';
 import Game from '../../game';
 
 var gameNode = document.getElementById('game');
-ReactDOM.render(<Game url={config.apiUrl} />, gameNode);
+ReactDOM.render(<Game url={config.apiUrl} roundCount={config.roundCount} />, gameNode);
