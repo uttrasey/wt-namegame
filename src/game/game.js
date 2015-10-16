@@ -24,7 +24,6 @@ class Game extends React.Component {
   /**
    * @description Load all the data and update state
    * TODO: handle graceful failure of REST API
-   * TODO: use local storage to cache the API response
    */
   componentDidMount () {
     request(this.props.url, function (error, response, body) {
@@ -85,23 +84,18 @@ class Game extends React.Component {
     return this.state.employees[exampleIndex];
   }
 
-  /**
-   * TODO this needs improving vastly
-   */
   getEmployeesForRound() {
     var employeeCount = this.state.employees.length;
     var uniqueEmployeeIndices = [];
+    var uniqueEmployees = [];
     while (uniqueEmployeeIndices.length < 3) {
       var candidate = Math.floor(Math.random() * employeeCount);
       if (uniqueEmployeeIndices.indexOf(candidate) == -1) {
         uniqueEmployeeIndices.push(candidate);
+        uniqueEmployees.push(this.state.employees[candidate]);
       }
     }
-    var chosenEmployees = [];
-    for (var employeeIndex of uniqueEmployeeIndices) {
-      chosenEmployees.push(this.state.employees[employeeIndex]);
-    }
-    return chosenEmployees;
+    return uniqueEmployees;
   }
 
   getInPlayBoard() {
