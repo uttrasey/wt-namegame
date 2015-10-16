@@ -15,7 +15,7 @@ class InitialBoard extends React.Component {
   render () {
     return <div className='initialBoard'>
               <Employee employee={this.props.employee} />
-              <h4>You will briefly see some faces then be asked to identify one!</h4>
+              <h4>Put a name to the face before they disappear!</h4>
               <Button bsSize="large"
                       bsStyle="success" onClick={this.startClicked.bind(this)}>Lets get started!</Button>
            </div>

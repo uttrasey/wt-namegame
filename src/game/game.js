@@ -3,6 +3,7 @@ import request from 'request';
 import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import ProgressBar from 'react-bootstrap/lib/ProgressBar';
 import InitialBoard from './components/InitialBoard';
+import NameGameBoard from './components/NameGameBoard';
 
 /*
  * @class Game representing the game board.
@@ -84,8 +85,27 @@ class Game extends React.Component {
     return this.state.employees[exampleIndex];
   }
 
+  /**
+   * TODO this needs improving vastly
+   */
+  getEmployeesForRound() {
+    var employeeCount = this.state.employees.length;
+    var uniqueEmployeeIndices = [];
+    while (uniqueEmployeeIndices.length < 3) {
+      var candidate = Math.floor(Math.random() * employeeCount);
+      if (uniqueEmployeeIndices.indexOf(candidate) == -1) {
+        uniqueEmployeeIndices.push(candidate);
+      }
+    }
+    var chosenEmployees = [];
+    for (var employeeIndex of uniqueEmployeeIndices) {
+      chosenEmployees.push(this.state.employees[employeeIndex]);
+    }
+    return chosenEmployees;
+  }
+
   getInPlayBoard() {
-    return <p>Playing!</p>;
+    return <NameGameBoard employees={this.getEmployeesForRound()} round={this.state.round} />;
   }
 
   getEndBoard() {
