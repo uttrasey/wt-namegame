@@ -10,6 +10,18 @@ import Employee from './Employee';
  */
 class NameGameBoard extends React.Component {
 
+  componentDidMount () {
+    setInterval(() => {
+      this.hideFaces();
+    }, 2200);
+  }
+
+  hideFaces() {
+    // this.setState({
+    //   fade: true
+    // });
+  }
+
   /*
    * @method render
    * @returns {JSX}

@@ -23,7 +23,7 @@ class Employee extends React.Component {
   render () {
     return <Thumbnail style={{'display': 'inline-block'}}
                       src={this.props.employee.url}>
-             <h3>{this.props.employee.name}</h3>
+             <h3 className='canfade'>{this.props.employee.name}</h3>
            </Thumbnail>;
   }
 }
