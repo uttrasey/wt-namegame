@@ -1,9 +1,11 @@
 import React from 'react';
 import classnames from 'classnames';
+import shuffler from 'knuth-shuffle';
 import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Employee from './Employee';
+import SelectableEmployee from './SelectableEmployee';
 
 /*
  * @class NameGameBoard
@@ -37,8 +39,6 @@ class NameGameBoard extends React.Component {
 
   /*
    * @method render
-   * TODO: loop through props.employees
-   * TODO: always render the main div here (ternary immediately invoked)
    * @returns {JSX}
    */
   render () {
@@ -64,18 +64,24 @@ class NameGameBoard extends React.Component {
            </div>;
   }
 
+  /**
+   * TODO: showName now hidden down in SelectableEmployee
+   */
   presentQuestion () {
-    var chosenEmployee = Math.floor(Math.random() * 3);
+    var shuffledEmployees = shuffler.knuthShuffle(this.props.employees.slice(0));
+    var chosenEmployeeIndex = Math.floor(Math.random() * shuffledEmployees.length);
     return <div>
               <div>
-                <Employee key={1} employee={this.props.employees[1]} showName={false} />
-                <Employee key={2} employee={this.props.employees[2]} showName={false} />
-                <Employee key={3} employee={this.props.employees[0]} showName={false} />
+                {shuffledEmployees.map(function(employee, i) {
+                  return (
+                    <SelectableEmployee key={i} employee={employee} />
+                  );
+                })}
               </div>
               <div>
-                <h4>Click on <b>{this.props.employees[2].name}</b></h4>
+                <h4>Click on {shuffledEmployees[chosenEmployeeIndex].name}!</h4>
               </div>
-          </div>;
+           </div>;
   }
 
 }
