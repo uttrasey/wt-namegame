@@ -16,12 +16,23 @@ class NameGameBoard extends React.Component {
   constructor (options) {
     super(options);
     this.state = {
-      questionTime: false,
+      phase: 1, //1 is show, 2 is question, 3 is result (this can be done better)
       fade: false
     };
   }
 
+  /**
+   * @description do our stateful stuff up front and set timeouts for the round
+   */
   componentDidMount () {
+    var shuffledEmployees = shuffler.knuthShuffle(this.props.employees.slice(0));
+    var correctAnswerIndex = Math.floor(Math.random() * shuffledEmployees.length);
+
+    this.setState({
+      shuffledEmployees: shuffledEmployees,
+      correctAnswerIndex: correctAnswerIndex
+    });
+
     // fade the faces out
     setTimeout(() => {
       this.setState({
@@ -32,7 +43,7 @@ class NameGameBoard extends React.Component {
     // present the question
     setTimeout(() => {
       this.setState({
-        questionTime: true
+        phase: 2
       });
     }, 4500);
   }
@@ -42,7 +53,14 @@ class NameGameBoard extends React.Component {
    * @returns {JSX}
    */
   render () {
-    var content = this.state.questionTime ? this.presentQuestion() : this.presentEmployees();
+    var content;
+    if (this.state.phase === 1) {
+      content = this.presentEmployees();
+    } else if (this.state.phase === 2) {
+      content = this.presentQuestion();
+    } else if (this.state.phase === 3) {
+      content = this.presentResult();
+    }
     return <div className='nameGameBoard'>
             {content}
           </div>;
@@ -52,7 +70,7 @@ class NameGameBoard extends React.Component {
     var classes = classnames('canfade', { 'fade': this.state.fade });
     return <div className={classes}>
               <div>
-                {this.props.employees.map(function(employee, i) {
+                {this.props.employees.map((employee, i) => {
                   return (
                     <Employee key={i} employee={employee} />
                   );
@@ -64,22 +82,29 @@ class NameGameBoard extends React.Component {
            </div>;
   }
 
+  employeeSelected (selectedEmployeeIndex) {
+    debugger;
+  }
+
   /**
-   * TODO: showName now hidden down in SelectableEmployee
+   *
+   answerCallback: React.PropTypes.func.isRequired,
+   status: React.PropTypes.string
    */
   presentQuestion () {
-    var shuffledEmployees = shuffler.knuthShuffle(this.props.employees.slice(0));
-    var chosenEmployeeIndex = Math.floor(Math.random() * shuffledEmployees.length);
     return <div>
               <div>
-                {shuffledEmployees.map(function(employee, i) {
+                {this.state.shuffledEmployees.map((employee, i) => {
                   return (
-                    <SelectableEmployee key={i} employee={employee} />
+                    <SelectableEmployee key={i}
+                                        employee={employee}
+                                        employeeIndex={i}
+                                        selectCallback={this.employeeSelected.bind(this)} />
                   );
                 })}
               </div>
               <div>
-                <h4>Click on {shuffledEmployees[chosenEmployeeIndex].name}!</h4>
+                <h4>Click on {this.state.shuffledEmployees[this.state.correctAnswerIndex].name}!</h4>
               </div>
            </div>;
   }
