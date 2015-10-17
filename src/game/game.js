@@ -17,7 +17,8 @@ class Game extends React.Component {
     super(options);
     this.state = {
       employees: [],
-      round: 0
+      round: 0,
+      correctAnswers: 0
     };
   }
 
@@ -99,7 +100,16 @@ class Game extends React.Component {
   }
 
   getInPlayBoard() {
-    return <NameGameBoard employees={this.getEmployeesForRound()} round={this.state.round} />;
+    return <NameGameBoard employees={this.getEmployeesForRound()}
+                          round={this.state.round}
+                          roundOver={this.roundOver.bind(this)} />;
+  }
+
+  roundOver(result) {
+    this.setState({
+      round: this.state.round + 1,
+      correctAnswers: this.state.correctAnswers + (result ? 1 : 0)
+    })
   }
 
   getEndBoard() {

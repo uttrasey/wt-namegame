@@ -86,8 +86,7 @@ class NameGameBoard extends React.Component {
     var correct = selectedEmployeeIndex === this.state.correctAnswerIndex;
     // send the answer back in half a second
     setTimeout(() => {
-      debugger;
-      // this.props.roundOver(correct); // TODO do this
+      this.props.roundOver(correct); // TODO do this
     }, 700);
 
     this.setState({
@@ -125,7 +124,7 @@ class NameGameBoard extends React.Component {
                 {this.state.shuffledEmployees.map((employee, i) => {
                     if (this.state.userAnswer === i) {
                       return <Employee key={i} employee={employee} />;
-                    } 
+                    }
                 })}
               </div>
               <div>
