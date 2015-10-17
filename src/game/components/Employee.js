@@ -28,6 +28,8 @@ Employee.propTypes = {
   employee: React.PropTypes.object.isRequired
 };
 
-Employee.defaultProps = { showName: true };
+Employee.defaultProps = {
+  showName: true
+};
 
 export default Employee;

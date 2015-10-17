@@ -83,13 +83,22 @@ class NameGameBoard extends React.Component {
   }
 
   employeeSelected (selectedEmployeeIndex) {
-    debugger;
+    var correct = selectedEmployeeIndex === this.state.correctAnswerIndex;
+    // send the answer back in half a second
+    setTimeout(() => {
+      debugger;
+      // this.props.roundOver(correct); // TODO do this
+    }, 700);
+
+    this.setState({
+      phase: 3,
+      userAnswer: selectedEmployeeIndex
+    });
+
   }
 
   /**
    *
-   answerCallback: React.PropTypes.func.isRequired,
-   status: React.PropTypes.string
    */
   presentQuestion () {
     return <div>
@@ -105,6 +114,22 @@ class NameGameBoard extends React.Component {
               </div>
               <div>
                 <h4>Click on {this.state.shuffledEmployees[this.state.correctAnswerIndex].name}!</h4>
+              </div>
+           </div>;
+  }
+
+  presentResult () {
+    var result = (this.state.userAnswer === this.state.correctAnswerIndex);
+    return <div>
+              <div>
+                {this.state.shuffledEmployees.map((employee, i) => {
+                    if (this.state.userAnswer === i) {
+                      return <Employee key={i} employee={employee} />;
+                    } 
+                })}
+              </div>
+              <div>
+                <h4>You did {result ? "good" : "bad"}!</h4>
               </div>
            </div>;
   }

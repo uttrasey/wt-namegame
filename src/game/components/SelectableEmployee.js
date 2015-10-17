@@ -2,7 +2,7 @@ import React from 'react';
 import Employee from './Employee';
 
 /*
- * @class SelectableEmployee
+ * @class SelectableEmployee TODO this can just be Selectable!!!
  * @extends React.Component
  */
 class SelectableEmployee extends React.Component {
@@ -31,7 +31,7 @@ class SelectableEmployee extends React.Component {
 SelectableEmployee.propTypes = {
   employee: React.PropTypes.object.isRequired,
   employeeIndex: React.PropTypes.number.isRequired,
-  selectCallback: React.PropTypes.func.isRequired,
+  selectCallback: React.PropTypes.func,
   status: React.PropTypes.string
 };
 

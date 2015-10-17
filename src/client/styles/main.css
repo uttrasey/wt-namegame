@@ -31,8 +31,10 @@
 
 .wrong {
   border: 1px solid red;
+  display: inline-block;
 }
 
 .correct {
   border: 1px solid green;
+  display: inline-block;
 }
