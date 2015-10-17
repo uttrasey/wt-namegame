@@ -10,27 +10,35 @@ import Employee from './Employee';
  */
 class NameGameBoard extends React.Component {
 
+  constructor (options) {
+    super(options);
+    this.state = {
+      fade: false
+    };
+  }
+
   componentDidMount () {
-    setInterval(() => {
+    setTimeout(() => {
       this.hideFaces();
     }, 2200);
   }
 
   hideFaces() {
-    // this.setState({
-    //   fade: true
-    // });
+    this.setState({
+      fade: true
+    });
   }
 
   /*
    * @method render
+   * TODO: loop through props.employees
    * @returns {JSX}
    */
   render () {
     return <div className='nameGameBoard'>
-            <Employee employee={this.props.employees[0]} />
-            <Employee employee={this.props.employees[1]} />
-            <Employee employee={this.props.employees[2]} />
+              <Employee key={1} employee={this.props.employees[0]} fade={this.state.fade} />
+              <Employee key={2} employee={this.props.employees[1]} fade={this.state.fade} />
+              <Employee key={3} employee={this.props.employees[2]} fade={this.state.fade} />
            </div>
   }
 
