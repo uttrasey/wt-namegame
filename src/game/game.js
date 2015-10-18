@@ -58,7 +58,7 @@ class Game extends React.Component {
   getCurrentBoard () {
     if (this.state.round === 0) {
       return this.getInitialBoard();
-    } else if (this.state.round === this.props.roundCount) {
+    } else if (this.state.round > this.props.roundCount) {
       return this.getEndBoard();
     } else {
       return this.getInPlayBoard();
