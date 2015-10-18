@@ -1,11 +1,7 @@
-# The React Way: Getting Started
+# My WillowTree name game
 
-[![Build Status](https://travis-ci.org/RisingStack/react-way-getting-started.svg?branch=master)](https://travis-ci.org/RisingStack/react-way-getting-started)  
-
-**Related blog post:**  
+This project was based (loosely) on the great article & boilerplate at
 http://blog.risingstack.com/the-react-way-getting-started-tutorial/
-
-Getting started with React and ES6
 
 Used technologies:  
 
@@ -29,11 +25,7 @@ Check your http://localhost:3000/ or  `open http://localhost:3000/`
 
 `npm test`
 
-## How to start code
+## How to start with code watch for dev
 
 Run:  
 `npm run webpack-watch`
-
-## Preview
-
-![screen shot 2015-04-11 at 11 48 41](https://cloud.githubusercontent.com/assets/1764512/7101012/cf4334fc-e040-11e4-9f28-aed24d68e46a.png)
