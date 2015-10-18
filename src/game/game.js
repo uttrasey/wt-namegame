@@ -1,5 +1,4 @@
 import React from 'react';
-import request from 'request';
 import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import ProgressBar from 'react-bootstrap/lib/ProgressBar';
 import InitialBoard from './components/InitialBoard';
@@ -7,7 +6,7 @@ import NameGameBoard from './components/NameGameBoard';
 import FinishBoard from './components/FinishBoard';
 
 /*
- * @class Game representing the game board.
+ * @class Game to remember WillowTree employee faces/names.
  */
 class Game extends React.Component {
 
@@ -24,24 +23,21 @@ class Game extends React.Component {
   }
 
   /**
-   * @description Load all the data and update state
+   * @description Fetch the employees
    * TODO: handle graceful failure of REST API
    */
   componentDidMount () {
-    request(this.props.url, function (error, response, body) {
-      if (!error && response.statusCode === 200) {
-        var employees = JSON.parse(body);
-        this.setState({
-          employees: employees,
-          init: true
-        });
-      }
-    }.bind(this));
+    fetch(this.props.url)
+      .then(r => r.json())
+      .then(data => this.setState({
+        employees: data,
+        init: true
+      }));
   }
 
   render () {
     if (!this.state.init) {
-      return null;
+      return <div>Loading...</div>;
     }
     return <div>
             <Jumbotron>
@@ -53,16 +49,48 @@ class Game extends React.Component {
            </div>;
   }
 
+  /**
+   * @description display the appropriate part of the game
+   */
   getCurrentBoard () {
     if (this.state.round === 0) {
       return this.getInitialBoard();
-    } else if (this.state.round > this.props.roundCount) {
-      return this.getEndBoard();
-    } else {
+    } else if (this.inProgress()) {
       return this.getInPlayBoard();
+    } else {
+      return this.getEndBoard();
     }
   }
 
+  /**
+   * @description the initial board which explains how to play the game
+   */
+  getInitialBoard() {
+    var randomEmployee = Math.floor(Math.random() * this.state.employees.length);
+    return <InitialBoard employee={this.state.employees[randomEmployee]}
+                         startCallback={this.startGame.bind(this)} />
+  }
+
+  /**
+   * @description render the actual game board
+   */
+  getInPlayBoard() {
+    return <NameGameBoard key={this.state.round}
+                          employees={this.getEmployeesForRound()}
+                          roundOver={this.roundOver.bind(this)} />;
+  }
+
+  /**
+   * @description render the results
+   */
+  getEndBoard() {
+    return <FinishBoard rounds={this.props.roundCount}
+                        correct={this.state.correctAnswers} />
+  }
+
+  /**
+   * @description transition from initial to ingame
+   */
   startGame () {
     this.setState({
       round: 1
@@ -70,25 +98,13 @@ class Game extends React.Component {
   }
 
   /**
-   * @description the initial board which explains how to play the game
+   * @description get 3 random unique employees
    */
-  getInitialBoard() {
-    return <InitialBoard employee={this.getExampleEmployee()}
-                         startCallback={this.startGame.bind(this)} />
-  }
-
-  getExampleEmployee() {
-    var employeeCount = this.state.employees.length;
-    var exampleIndex = Math.floor(Math.random() * employeeCount);
-    return this.state.employees[exampleIndex];
-  }
-
   getEmployeesForRound() {
-    var employeeCount = this.state.employees.length;
     var uniqueEmployeeIndices = [];
     var uniqueEmployees = [];
     while (uniqueEmployeeIndices.length < 3) {
-      var candidate = Math.floor(Math.random() * employeeCount);
+      var candidate = Math.floor(Math.random() * this.state.employees.length);
       if (uniqueEmployeeIndices.indexOf(candidate) == -1) {
         uniqueEmployeeIndices.push(candidate);
         uniqueEmployees.push(this.state.employees[candidate]);
@@ -97,22 +113,14 @@ class Game extends React.Component {
     return uniqueEmployees;
   }
 
-  getInPlayBoard() {
-    return <NameGameBoard key={this.state.round}
-                          employees={this.getEmployeesForRound()}
-                          roundOver={this.roundOver.bind(this)} />;
-  }
-
+  /**
+   * @description Trigger the next round
+   */
   roundOver(result) {
     this.setState({
       round: this.state.round + 1,
       correctAnswers: this.state.correctAnswers + (result ? 1 : 0)
     })
-  }
-
-  getEndBoard() {
-    return <FinishBoard rounds={this.props.roundCount}
-                        correct={this.state.correctAnswers} />
   }
 
   /**
