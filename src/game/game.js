@@ -39,9 +39,6 @@ class Game extends React.Component {
     }.bind(this));
   }
 
-  /**
-   * @description Top level render of name game application
-   */
   render () {
     if (!this.state.init) {
       return null;
@@ -119,19 +116,24 @@ class Game extends React.Component {
   }
 
   /**
-   * @description Get users progress through the current game (0 - 100)
+   * @description return the user's progress through the current game (0 - 100)
    */
   getProgress() {
     return (this.state.round / this.props.roundCount) * 100;
   }
 
   /**
-   * Is the user playing? i.e. started and finished
+   * @description Is the user somewhere between the beginning and the end
    */
   inProgress() {
-    return this.state.round > 0 && this.state.round <= this.props.roundCount;
+    return (this.state.round > 0) && (this.state.round <= this.props.roundCount);
   }
 
 }
+
+Game.propTypes = {
+  url: React.PropTypes.string.isRequired,
+  roundCount: React.PropTypes.number.isRequired
+};
 
 export default Game;

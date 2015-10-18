@@ -17,7 +17,10 @@ class InitialBoard extends React.Component {
               <Employee employee={this.props.employee} />
               <h4>Put a name to the face before they disappear!</h4>
               <Button bsSize="large"
-                      bsStyle="success" onClick={this.startClicked.bind(this)}>Lets get started!</Button>
+                      bsStyle="success"
+                      onClick={this.startClicked.bind(this)}>
+                  Lets get started!
+              </Button>
            </div>
   }
 

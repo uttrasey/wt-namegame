@@ -84,10 +84,10 @@ class NameGameBoard extends React.Component {
 
   employeeSelected (selectedEmployeeIndex) {
     var correct = selectedEmployeeIndex === this.state.correctAnswerIndex;
-    // send the answer back in half a second
+    
     setTimeout(() => {
       this.props.roundOver(correct);
-    }, 700);
+    }, 1000);
 
     this.setState({
       phase: 3,
