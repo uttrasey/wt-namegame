@@ -100,8 +100,8 @@ class Game extends React.Component {
   }
 
   getInPlayBoard() {
-    return <NameGameBoard employees={this.getEmployeesForRound()}
-                          round={this.state.round}
+    return <NameGameBoard key={this.state.round}
+                          employees={this.getEmployeesForRound()}
                           roundOver={this.roundOver.bind(this)} />;
   }
 
