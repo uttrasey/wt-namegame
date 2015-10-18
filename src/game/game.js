@@ -4,6 +4,7 @@ import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import ProgressBar from 'react-bootstrap/lib/ProgressBar';
 import InitialBoard from './components/InitialBoard';
 import NameGameBoard from './components/NameGameBoard';
+import FinishBoard from './components/FinishBoard';
 
 /*
  * @class Game representing the game board.
@@ -113,7 +114,8 @@ class Game extends React.Component {
   }
 
   getEndBoard() {
-    return <p>Finished!</p>;
+    return <FinishBoard rounds={this.props.roundCount}
+                        correct={this.state.correctAnswers} />
   }
 
   /**

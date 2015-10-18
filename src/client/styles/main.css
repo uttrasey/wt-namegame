@@ -15,6 +15,12 @@
   text-align: center;
 }
 
+.finishBoard {
+  padding-top: 10px;
+  margin: auto;
+  text-align: center;
+}
+
 .canfade {
   -webkit-transition: all 2s ease-in-out;
   -moz-transition: all 2s ease-in-out;
