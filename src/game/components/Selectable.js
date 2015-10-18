@@ -1,4 +1,5 @@
 import React from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 /*
  * @class Generic Component to make something selectable. When selected it fires
@@ -7,6 +8,9 @@ import React from 'react';
  */
 class Selectable extends React.Component {
 
+  shouldComponentUpdate () {
+    return PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
+  }
   /*
    * @method render
    * //TODO propogate style into this thing

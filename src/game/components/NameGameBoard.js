@@ -1,4 +1,5 @@
 import React from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 import classnames from 'classnames';
 import shuffler from 'knuth-shuffle';
 import Grid from 'react-bootstrap/lib/Grid';
@@ -12,6 +13,10 @@ import Employee from './Employee';
  * @extends React.Component
  */
 class NameGameBoard extends React.Component {
+
+  shouldComponentUpdate () {
+    return PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
+  }
 
   /**
    * @constructor

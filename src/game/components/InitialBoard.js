@@ -1,4 +1,5 @@
 import React from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 import Button from 'react-bootstrap/lib/Button';
 import Employee from './Employee';
 
@@ -7,6 +8,10 @@ import Employee from './Employee';
  * @extends React.Component
  */
 class InitialBoard extends React.Component {
+
+  shouldComponentUpdate () {
+    return PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
+  }
 
   /*
    * @method render

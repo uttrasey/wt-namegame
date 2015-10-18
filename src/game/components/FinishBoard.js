@@ -1,10 +1,15 @@
 import React from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 /*
  * @class FinishBoard
  * @extends React.Component
  */
 class FinishBoard extends React.Component {
+
+  shouldComponentUpdate () {
+    return PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
+  }
 
   /*
    * @method render

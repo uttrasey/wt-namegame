@@ -1,4 +1,5 @@
 import React from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 import Image from 'react-bootstrap/lib/Image';
 import Thumbnail from 'react-bootstrap/lib/Thumbnail';
 
@@ -7,6 +8,10 @@ import Thumbnail from 'react-bootstrap/lib/Thumbnail';
  * @extends React.Component
  */
 class Employee extends React.Component {
+
+  shouldComponentUpdate () {
+    return PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
+  }
 
   /*
    * @method render
