@@ -6,6 +6,7 @@ http://blog.risingstack.com/the-react-way-getting-started-tutorial/
 Used technologies:  
 
 - React
+- React Bootstrap
 - ES6
 - Webpack
 - Babel
