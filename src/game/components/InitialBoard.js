@@ -13,7 +13,7 @@ class InitialBoard extends React.Component {
    * @returns {JSX}
    */
   render () {
-    return <div className='initialBoard'>
+    return <div className='board'>
               <Employee employee={this.props.employee} />
               <h4>Put a name to the face before they disappear!</h4>
               <Button bsSize="large"

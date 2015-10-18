@@ -5,7 +5,6 @@ import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Employee from './Employee';
-import SelectableEmployee from './SelectableEmployee';
 import Selectable from './Selectable';
 
 /*
@@ -62,7 +61,7 @@ class NameGameBoard extends React.Component {
     } else if (this.state.phase === 3) {
       content = this.presentResult();
     }
-    return <div className='nameGameBoard'>
+    return <div className='board'>
             {content}
           </div>;
   }

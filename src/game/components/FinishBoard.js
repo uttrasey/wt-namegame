@@ -11,7 +11,7 @@ class FinishBoard extends React.Component {
    * @returns {JSX}
    */
   render () {
-    return <div className='finishBoard'>
+    return <div className='board'>
               <h4>All finished!! You got {this.props.correct} out of {this.props.rounds}</h4>
            </div>
   }
