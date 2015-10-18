@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Employee from './Employee';
 import SelectableEmployee from './SelectableEmployee';
+import Selectable from './Selectable';
 
 /*
  * @class NameGameBoard
@@ -102,11 +103,15 @@ class NameGameBoard extends React.Component {
     return <div>
               <div>
                 {this.state.shuffledEmployees.map((employee, i) => {
+                  var employeeComponent = <Employee key={i}
+                                                    employee={employee}
+                                                    showName={false} />;
                   return (
-                    <SelectableEmployee key={i}
-                                        employee={employee}
-                                        employeeIndex={i}
-                                        selectCallback={this.employeeSelected.bind(this)} />
+                    <Selectable key={i}
+                                selectCallback={this.employeeSelected.bind(this)}
+                                item={i}
+                                content={employeeComponent}>
+                    </Selectable>
                   );
                 })}
               </div>

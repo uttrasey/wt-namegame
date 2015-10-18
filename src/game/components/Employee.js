@@ -25,7 +25,8 @@ class Employee extends React.Component {
 }
 
 Employee.propTypes = {
-  employee: React.PropTypes.object.isRequired
+  employee: React.PropTypes.object.isRequired,
+  showName: React.PropTypes.bool
 };
 
 Employee.defaultProps = {
