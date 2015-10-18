@@ -102,7 +102,7 @@ class NameGameBoard extends React.Component {
                 })}
               </div>
               <div>
-                <h4>Get remembering!</h4>
+                <h3>Memorize these people quick...</h3>
               </div>
            </div>;
   }
@@ -146,7 +146,7 @@ class NameGameBoard extends React.Component {
                 })}
               </div>
               <div>
-                <h4>You did {result ? "good" : "bad"}!</h4>
+                <h3>{result ? "Well done!" : "Unlucky"}!</h3>
               </div>
            </div>;
   }

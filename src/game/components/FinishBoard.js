@@ -17,7 +17,7 @@ class FinishBoard extends React.Component {
    */
   render () {
     return <div className='board'>
-              <h4>All finished!! You got {this.props.correct} out of {this.props.rounds}</h4>
+              <h3>All finished!! You got {this.props.correct} out of {this.props.rounds}</h3>
            </div>
   }
 
