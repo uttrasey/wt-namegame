@@ -127,7 +127,7 @@ class NameGameBoard extends React.Component {
                 })}
               </div>
               <div>
-                <h4>Click on {this.state.shuffledEmployees[this.state.correctAnswerIndex].name}!</h4>
+                <h3>Click on {this.state.shuffledEmployees[this.state.correctAnswerIndex].name}!</h3>
               </div>
            </div>;
   }
