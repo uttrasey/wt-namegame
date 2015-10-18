@@ -40,8 +40,7 @@
       "react"
     ],
     "testPathDirs": [
-      "./src/app",
-      "./src/client"
+      "./src/game"
     ]
   }
 }
