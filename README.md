@@ -10,7 +10,7 @@ Used technologies:
 - ES6
 - Webpack
 - Babel
-- Jest
+- Jest (TODO)
 
 ## How to start
 
