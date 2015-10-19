@@ -31,8 +31,3 @@ TODO add JEST tests
 Run:  
 `npm run webpack-watch`
 
-## TODO
-
-- more tests
-- look at http-server
-- more features
