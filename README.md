@@ -24,7 +24,7 @@ Check your http://localhost:3000/ or  `open http://localhost:3000/`
 
 ## How to test
 
-`npm test`
+TODO add JEST tests
 
 ## How to start with code watch for dev
 
