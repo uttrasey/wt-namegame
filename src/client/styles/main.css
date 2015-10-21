@@ -1,23 +1,24 @@
-
-.appRoot {
-  border: 2px solid blue;
-  padding: 10px;
+.jumbotron {
+  padding: 20px 30px 10px 30px;
+  margin: 0;
 }
 
-.cart {
-  border: 2px solid red;
-  padding: 10px;
-}
-.item {
-  border: 2px solid green;
-  padding: 10px;
+.board {
+  padding-top: 10px;
+  margin: auto;
+  text-align: center;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
+.canfade {
+  -webkit-transition: all 2s ease-in-out;
+  -moz-transition: all 2s ease-in-out;
+  -ms-transition: all 2s ease-in-out;
+  -o-transition: all 2s ease-in-out;
+  transition: all 2s ease-in-out;
 }
 
-li {
-  margin: 5px 0 5px 0;
+.fade {
+  -webkit-opacity: 0.0;
+  -moz-opacity: 0.0;
+  opacity: 0.0;
 }

@@ -1,70 +1,147 @@
-import React from 'react/addons';
-import Debug from 'debug';
-
-import AppRoot from './components/AppRoot';
-
-var debug = Debug('nameGame');
+import React from 'react';
+import Jumbotron from 'react-bootstrap/lib/Jumbotron';
+import ProgressBar from 'react-bootstrap/lib/ProgressBar';
+import InitialBoard from './components/InitialBoard';
+import NameGameBoard from './components/NameGameBoard';
+import FinishBoard from './components/FinishBoard';
 
 /*
- * @class Game
+ * @class Game to remember WillowTree employee faces/names.
  */
-class Game {
+class Game extends React.Component {
 
-  /*
-   * @constructs App
-   * @param {Object} options
+  /**
+   * @constructor
    */
   constructor(options) {
-    debug('create name game with options', options);
-
-    this.state = options.state;
+    super(options);
+    this.state = {
+      employees: [],
+      round: 0,
+      correctAnswers: 0
+    };
   }
 
-  /*
-   * @method render
-   * @param {DOM} [element]
-   * @returns {String|undefined}
+  /**
+   * @description Fetch the employees
+   * TODO: handle graceful failure of REST API
    */
-   render (element) {
+  componentDidMount () {
+    fetch(this.props.url)
+      .then(r => r.json())
+      .then(data => this.setState({
+        employees: data,
+        init: true
+      }));
+  }
 
-    debug('render name game with state', this.state);
+  render () {
+    if (!this.state.init) {
+      return <div>Loading...</div>;
+    }
+    return <div>
+            <Jumbotron>
+              <h1>WillowTree Name Game</h1>
+              <p>How many names can you remember?</p>
+            </Jumbotron>
+            <ProgressBar active={this.inProgress()} bsStyle="success" now={this.getProgress()} />
+            {this.getCurrentBoard()}
+           </div>;
+  }
 
-    // would be in JSX: <AppRoot state={this.state} />
-    var appRootElement = React.createElement(AppRoot, {
-      state: this.state
+  /**
+   * @description display the appropriate part of the game
+   */
+  getCurrentBoard () {
+    if (this.state.round === 0) {
+      return this.getInitialBoard();
+    } else if (this.inProgress()) {
+      return this.getInPlayBoard();
+    } else {
+      return this.getEndBoard();
+    }
+  }
+
+  /**
+   * @description the initial board which explains how to play the game
+   */
+  getInitialBoard() {
+    var randomEmployee = Math.floor(Math.random() * this.state.employees.length);
+    return <InitialBoard employee={this.state.employees[randomEmployee]}
+                         startCallback={this.startGame.bind(this)} />
+  }
+
+  /**
+   * @description render the actual game board
+   */
+  getInPlayBoard() {
+    return <NameGameBoard key={this.state.round}
+                          employees={this.getEmployeesForRound()}
+                          roundOver={this.roundOver.bind(this)} />;
+  }
+
+  /**
+   * @description render the results
+   */
+  getEndBoard() {
+    return <FinishBoard rounds={this.props.roundCount}
+                        correct={this.state.correctAnswers} />
+  }
+
+  /**
+   * @description transition from initial to ingame
+   */
+  startGame () {
+    this.setState({
+      round: 1
     });
-
-    // render to DOM
-    if(element) {
-      debug('render to DOM');
-      React.render(appRootElement, element);
-      return;
-    }
-
-    // render to string
-    debug('render to string');
-    return React.renderToString(appRootElement);
   }
 
-  /*
-   * @method render
-   * @param {DOM} element
+  /**
+   * @description get 3 random unique employees
    */
-   renderToDOM (element) {
-    if(!element) {
-      return debug(new Error('App.renderToDOM: element is required'));
+  getEmployeesForRound() {
+    var uniqueEmployeeIndices = [];
+    var uniqueEmployees = [];
+    while (uniqueEmployeeIndices.length < 3) {
+      var candidate = Math.floor(Math.random() * this.state.employees.length);
+      if (uniqueEmployeeIndices.indexOf(candidate) == -1) {
+        uniqueEmployeeIndices.push(candidate);
+        uniqueEmployees.push(this.state.employees[candidate]);
+      }
     }
-
-    this.render(element);
-   }
-
-  /*
-   * @method renderToString
-   * @returns {String}
-   */
-   renderToString () {
-    return this.render();
+    return uniqueEmployees;
   }
+
+  /**
+   * @description Trigger the next round
+   */
+  roundOver(result) {
+    this.setState({
+      round: this.state.round + 1,
+      correctAnswers: this.state.correctAnswers + (result ? 1 : 0)
+    })
+  }
+
+  /**
+   * @description return the user's progress through the current game (0 - 100)
+   */
+  getProgress() {
+    return (this.state.round / this.props.roundCount) * 100;
+  }
+
+  /**
+   * @description Is the user somewhere between the beginning and the end
+   */
+  inProgress() {
+    return (this.state.round > 0) && (this.state.round <= this.props.roundCount);
+  }
+
 }
+
+Game.propTypes = {
+  url: React.PropTypes.string.isRequired,
+  roundCount: React.PropTypes.number.isRequired
+};
 
 export default Game;

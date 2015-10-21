@@ -13,7 +13,18 @@ module.exports = {
         test: /src\/.+.js$/,
         exclude: /node_modules/,
         loader: 'babel'
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
       }
     ]
+  },
+
+  node: {
+    console: 'empty',
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty'
   }
 };

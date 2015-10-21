@@ -4,7 +4,6 @@
   "description": "WillowTree name game React implementation based on https://blog.risingstack.com/the-react-way-getting-started-tutorial/",
   "main": "src/server/index.js",
   "scripts": {
-    "test": "jest",
     "start": "node src/server/index.js",
     "postinstall": "webpack --config config/webpack.js",
     "webpack": "webpack --config config/webpack.js",
@@ -16,25 +15,21 @@
   },
   "author": "Matt Uttridge",
   "dependencies": {
+    "classnames": "^2.1.5",
     "debug": "^2.1.3",
     "express": "^4.12.3",
-    "react": "^0.13.1"
+    "knuth-shuffle": "^1.0.1",
+    "react": "^0.14.0",
+    "react-addons-pure-render-mixin": "^0.14.0",
+    "react-bootstrap": "^0.27.1"
   },
   "devDependencies": {
     "babel": "^5.0.12",
     "babel-core": "^5.0.12",
     "babel-loader": "^5.0.0",
-    "jest-cli": "^0.4.0",
+    "json-loader": "^0.5.3",
+    "react-addons-test-utils": "^0.14.0",
+    "request": "^2.65.0",
     "webpack": "^1.8.4"
-  },
-  "jest": {
-    "scriptPreprocessor": "./tools/preprocessor.js",
-    "unmockedModulePathPatterns": [
-      "react"
-    ],
-    "testPathDirs": [
-      "./src/app",
-      "./src/client"
-    ]
   }
 }
