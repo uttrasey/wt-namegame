@@ -7,7 +7,8 @@
     "start": "node src/server/index.js",
     "postinstall": "webpack --config config/webpack.js",
     "webpack": "webpack --config config/webpack.js",
-    "webpack-watch": "webpack --config config/webpack.js --watch --colors"
+    "webpack-watch": "webpack --config config/webpack.js --watch --colors",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
     "babel": "^5.0.12",
     "babel-core": "^5.0.12",
     "babel-loader": "^5.0.0",
+    "jest-cli": "^0.6.1",
     "json-loader": "^0.5.3",
     "react-addons-test-utils": "^0.14.0",
     "request": "^2.65.0",
